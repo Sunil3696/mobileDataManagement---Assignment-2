@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10BB60FB2C3F894200C36EB8 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB60FA2C3F894200C36EB8 /* DatabaseManager.swift */; };
 		10C9CEF32C3F13B000CAC2EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CEF22C3F13B000CAC2EA /* AppDelegate.swift */; };
 		10C9CEF52C3F13B000CAC2EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CEF42C3F13B000CAC2EA /* SceneDelegate.swift */; };
 		10C9CEF72C3F13B000CAC2EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CEF62C3F13B000CAC2EA /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10BB60FA2C3F894200C36EB8 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		10C9CEEF2C3F13B000CAC2EA /* mobileDataManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mobileDataManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10C9CEF22C3F13B000CAC2EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10C9CEF42C3F13B000CAC2EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 		10C9CF122C3F13B300CAC2EA /* mobileDataManagementUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mobileDataManagementUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10C9CF162C3F13B300CAC2EA /* mobileDataManagementUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mobileDataManagementUITests.swift; sourceTree = "<group>"; };
 		10C9CF182C3F13B300CAC2EA /* mobileDataManagementUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mobileDataManagementUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		10C9CF252C3F1CCB00CAC2EA /* 3MS3PYEKJI2N533Z3ZG6VJ2RKU.avif */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3MS3PYEKJI2N533Z3ZG6VJ2RKU.avif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +108,12 @@
 				10C9CEF42C3F13B000CAC2EA /* SceneDelegate.swift */,
 				10C9CEF62C3F13B000CAC2EA /* ViewController.swift */,
 				10C9CEF82C3F13B000CAC2EA /* Main.storyboard */,
+				10C9CF252C3F1CCB00CAC2EA /* 3MS3PYEKJI2N533Z3ZG6VJ2RKU.avif */,
 				10C9CEFE2C3F13B200CAC2EA /* Assets.xcassets */,
 				10C9CF002C3F13B200CAC2EA /* LaunchScreen.storyboard */,
 				10C9CF032C3F13B200CAC2EA /* Info.plist */,
 				10C9CEFB2C3F13B000CAC2EA /* mobileDataManagement.xcdatamodeld */,
+				10BB60FA2C3F894200C36EB8 /* DatabaseManager.swift */,
 			);
 			path = mobileDataManagement;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 			files = (
 				10C9CEFD2C3F13B000CAC2EA /* mobileDataManagement.xcdatamodeld in Sources */,
 				10C9CEF72C3F13B000CAC2EA /* ViewController.swift in Sources */,
+				10BB60FB2C3F894200C36EB8 /* DatabaseManager.swift in Sources */,
 				10C9CEF32C3F13B000CAC2EA /* AppDelegate.swift in Sources */,
 				10C9CEF52C3F13B000CAC2EA /* SceneDelegate.swift in Sources */,
 			);
