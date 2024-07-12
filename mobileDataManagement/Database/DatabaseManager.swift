@@ -4,29 +4,17 @@
 //
 //  Created by Sunil Balami on 2024-07-10.
 //
-
 import UIKit
+import CoreData
 
-struct MovieModel{
-    let movieNames : String
-    let studio : String
-    let directors : String
-    let writerName : String
-    let actors : String
-    let releasedYear : String
-    let movieLength : String
-    let description : String
-    let mpa : String
-    let criticsRating : String
-    let genre : String
-    
-    
-    
-}
+ 
 
 class DatabaseManager {
-    func addMovie(_ movie : MovieModel) {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var  context : NSManagedObjectContext{
+        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    }
+    
+    func   addMovie(_ movie : MovieModel) {
         
        let movieEntity = MovieEntity(context: context)
         movieEntity.title = movie.movieNames
@@ -40,6 +28,7 @@ class DatabaseManager {
         movieEntity.mpaRating = movie.mpa
         movieEntity.criticsRating = movie.criticsRating
         movieEntity.genres = movie.genre
+        movieEntity.imageName =  movie.imageName
         
         
         do {
@@ -47,5 +36,16 @@ class DatabaseManager {
         }catch {
             print("Movie can not be saved: ", error)
         }
+    }
+    
+    func  fetchMovies() -> [MovieEntity ]{
+        var movies : [MovieEntity] = []
+        do {
+            movies =  try   context.fetch(MovieEntity.fetchRequest()  )
+        }catch {
+            print("Movie Fetch Error", error)
+        }
+        
+        return movies
     }
 }
