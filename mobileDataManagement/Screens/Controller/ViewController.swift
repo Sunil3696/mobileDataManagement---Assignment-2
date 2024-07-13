@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var studio: UITextField!
     
-    
     @IBOutlet weak var directors: UITextField!
     
     @IBOutlet weak var genre: UITextField!
@@ -35,24 +34,54 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
     
+    @IBOutlet weak var registerButton: UIButton!
+    
+    
     private let manager = DatabaseManager()
     private var imageSelected : Bool = false
+    var movie :   MovieEntity?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configuration()
         // Do any additional setup after loading the view.
     }
     
+    
     func   configuration(){
            addGesture()
+        movieDetailConfiguration()
     }
+    
     
     func addGesture ()
     {
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(ViewController.openGallery ))
-        
         profileImageView.addGestureRecognizer(imageTap)
-         
+    }
+    
+    
+    func  movieDetailConfiguration(){
+        if let movie {
+            navigationItem.title = "Update Movie"
+            registerButton.setTitle("Update", for: .normal )
+            movieName.text = movie.title
+            studio.text = movie.studio
+            directors.text = movie.directors
+            genre.text = movie.genres
+            writersName.text = movie.writers
+            actorName.text = movie.actors
+            releasedYear.text = movie.year
+            movieLength.text = movie.length
+            descriptions.text = movie.shortDescriptions
+            mpa.text = movie.mpaRating
+            criticsRating.text = movie.criticsRating
+            let  imageUrl  = URL.documentsDirectory.appending(components: movie.imageName ?? ""  ).appendingPathExtension("png")
+            profileImageView.image = UIImage (contentsOfFile: imageUrl.path ?? "")
+        }else {
+            navigationItem.title = "Add Movie"
+            registerButton.setTitle("Add Movie", for: .normal )
+        }
     }
     
     
@@ -79,7 +108,7 @@ class ViewController: UIViewController {
         print(studio!)
         print(directors!)
         let imageName = UUID().uuidString
-        let movie = MovieModel(movieNames: movieNames,
+        var newMovie = MovieModel(movieNames: movieNames,
                                studio: studio!,
                                directors: directors!,
                                writerName: writerName!,
@@ -92,10 +121,25 @@ class ViewController: UIViewController {
                                genre: genre!,
                                imageName: imageName
                              )
-        saveImageToDirectory(imageName: imageName)
-        manager.addMovie(movie)
         
-        showAlert()
+         
+        if let movie {
+            newMovie.imageName  = movie.imageName ?? ""
+            
+            
+            manager.updateMovie(movie: newMovie, movieEntity: movie  )
+            saveImageToDirectory(imageName: movie.imageName ?? "")
+            updateshowAlert()
+//            let storyboard = UIStoryboard(name: "MoviesListViewController", bundle: nil)
+//                    let secondViewController = storyboard.instantiateViewController(withIdentifier: "MoviesListViewController") as! MoviesListViewController
+//                    self.navigationController?.pushViewController(secondViewController, animated: true)
+           
+        }else {
+            saveImageToDirectory(imageName: imageName)
+            manager.addMovie(newMovie )
+            
+            showAlert()
+        }
     }
     
     func  saveImageToDirectory   (imageName : String){
@@ -113,7 +157,13 @@ class ViewController: UIViewController {
     
     
     func showAlert() {
-        let alertController = UIAlertController(title: nil, message: "User added", preferredStyle: .alert)
+        let alertController = UIAlertController(title: nil, message: "Movie added", preferredStyle: .alert)
+        let okay = UIAlertAction(title: "Okay", style: .default)
+        alertController.addAction(okay)
+        present(alertController, animated: true)
+    }
+    func updateshowAlert() {
+        let alertController = UIAlertController(title: nil, message: "Movie record updated", preferredStyle: .alert)
         let okay = UIAlertAction(title: "Okay", style: .default)
         alertController.addAction(okay)
         present(alertController, animated: true)

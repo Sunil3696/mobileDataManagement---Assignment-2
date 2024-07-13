@@ -18,7 +18,7 @@ struct MovieModel{
     let mpa : String
     let criticsRating : String
     let genre : String
-    let imageName : String 
+    var imageName : String
     
     
     
