@@ -8,7 +8,7 @@
 import UIKit
 
 class MoviesListViewController: UIViewController {
-
+    let csvParser = CSVParser()
     @IBOutlet weak var movieTableView: UITableView!
     
     private  var movies : [MovieEntity] =  []
@@ -20,6 +20,56 @@ class MoviesListViewController: UIViewController {
         movieTableView.register(UINib(nibName: "MovieCell", bundle: nil), forCellReuseIdentifier: "MovieCell")
           
         // Do any additional setup after loading the view.
+    }
+    
+   
+    @IBAction func importBUttonpressed(_ sender: UIBarButtonItem) {
+        if UserDefaults.standard.bool(forKey: "CSVImported") {
+                   print("CSV data already imported.")
+                   return
+               }
+               
+               guard let url = Bundle.main.url(forResource: "movies", withExtension: "csv") else {
+                   print("Failed to find the CSV file.")
+                   return
+               }
+               importCSV(from: url)
+               UserDefaults.standard.set(true, forKey: "CSVImported")
+        
+    }
+    func importCSV(from url: URL) {
+        do {
+            let csvData = try String(contentsOf: url, encoding: .utf8)
+            print("CSV data: \(csvData)")
+            
+            let csvParser = CSVParser()
+            let moviesData = csvParser.parseCSV(csvData)
+            print("Parsed data: \(moviesData)")
+            
+            for movieData in moviesData {
+                let movie = MovieModel(
+                    movieNames: movieData["titles"] ?? "",
+                    studio: movieData["studio"] ?? "",
+                    directors: movieData["directors"] ?? "",
+                    writerName: movieData["writers"] ?? "",
+                    actors: movieData["actors"] ?? "",
+                    releasedYear: movieData["year"] ?? "",
+                    movieLength: movieData["length"] ?? "",
+                    description: movieData["shortDescription"] ?? "",
+                    mpa: movieData["mpaRating"] ?? "",
+                    criticsRating: movieData["criticsRating"] ?? "",
+                    genre: movieData["genres"] ?? "",
+                    imageName: movieData["imageName"] ?? ""
+                )
+                manager.addMovie(movie)
+            }
+            
+            movies = manager.fetchMovies()
+            movieTableView.reloadData()
+            
+        } catch {
+            print("Failed to import CSV: \(error)")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,7 +119,7 @@ extension MoviesListViewController: UITableViewDataSource {
 }
 extension MoviesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let update =   UIContextualAction(style: .normal, title: "Update") {_,_,_ in
+        let update =   UIContextualAction(style: .normal, title: "View/Update") {_,_,_ in
             self.addUpdateMovieNavigation(movie : self.movies[indexPath.row])
         }
         update.backgroundColor = .systemIndigo
@@ -79,10 +129,10 @@ extension MoviesListViewController: UITableViewDelegate {
             self.movies.remove(at: indexPath.row)
             self.movieTableView.reloadData()
         }
-        
-        
-        
         return UISwipeActionsConfiguration(actions: [update, delete]   )
     }
 }
+
+
+
  

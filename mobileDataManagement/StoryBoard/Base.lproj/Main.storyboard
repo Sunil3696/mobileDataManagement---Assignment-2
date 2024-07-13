@@ -35,12 +35,19 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="Bz7-aV-n1j">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xaN-6v-5Nd">
-                            <connections>
-                                <action selector="addMovieButton:" destination="p70-rb-BCr" id="ZA5-9r-VsM"/>
-                                <segue destination="Fuv-FH-Q08" kind="show" id="bma-CI-fXj"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="xaN-6v-5Nd">
+                                <connections>
+                                    <action selector="addMovieButton:" destination="p70-rb-BCr" id="ZA5-9r-VsM"/>
+                                    <segue destination="Fuv-FH-Q08" kind="show" id="bma-CI-fXj"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Import" id="iQE-OR-NeU">
+                                <connections>
+                                    <action selector="importBUttonpressed:" destination="p70-rb-BCr" id="NzL-lQ-fVU"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="movieTableView" destination="6rh-Zv-bfm" id="yj4-V6-neb"/>

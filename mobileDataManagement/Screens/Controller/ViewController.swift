@@ -39,6 +39,7 @@ class ViewController: UIViewController {
     
     private let manager = DatabaseManager()
     private var imageSelected : Bool = false
+    
     var movie :   MovieEntity?
     
     override func viewDidLoad() {
@@ -130,10 +131,6 @@ class ViewController: UIViewController {
             manager.updateMovie(movie: newMovie, movieEntity: movie  )
             saveImageToDirectory(imageName: movie.imageName ?? "")
             updateshowAlert()
-//            let storyboard = UIStoryboard(name: "MoviesListViewController", bundle: nil)
-//                    let secondViewController = storyboard.instantiateViewController(withIdentifier: "MoviesListViewController") as! MoviesListViewController
-//                    self.navigationController?.pushViewController(secondViewController, animated: true)
-           
         }else {
             saveImageToDirectory(imageName: imageName)
             manager.addMovie(newMovie )
